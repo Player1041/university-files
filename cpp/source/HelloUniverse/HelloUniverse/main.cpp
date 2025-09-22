@@ -8,6 +8,11 @@ using namespace std;
 int main()
 {
 	cout << "Hello World!" << endl; //console output << print here << end line
+	cout << "  O  " << endl;
+	cout << " OOO " << endl;
+	cout << "OOOOO" << endl;
+	cout << " OOO " << endl;
+	cout << "  O  " << endl;
 	return 0; // return 0 as success
 }
 
