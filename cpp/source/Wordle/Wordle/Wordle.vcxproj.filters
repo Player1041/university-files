@@ -15,19 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="maths.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="celcius.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="further.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="volume.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="charchoice.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int main() {
+int maina() {
 	float f;
     float c;
 
@@ -12,5 +12,5 @@ int main() {
 
 	c = (f - 32) * 5 / 9;
 	cout << f << " Fahrenheit in Celsius is " << c << endl;
-
+	return 0;
 }

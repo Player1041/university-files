@@ -4,6 +4,7 @@
 using namespace std;
 
 int main2() {
+
 	int value1;
 	cout << "Input a number" << endl;
 	cin >> value1;
