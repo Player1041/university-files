@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int maina() {
+int main() {
 	float f;
     float c;
 
