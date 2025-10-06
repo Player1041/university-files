@@ -15,19 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="intcompare.cpp">
+    <ClCompile Include="voting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="oddeven.cpp">
+    <ClCompile Include="catdoor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="leapyear.cpp">
+    <ClCompile Include="fizzbuzz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="secondstohours.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gradecalc.cpp">
+    <ClCompile Include="sorting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

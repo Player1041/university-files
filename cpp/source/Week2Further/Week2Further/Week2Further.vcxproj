@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0dabb70d-33ff-4771-a30d-b1a4340f3aa3}</ProjectGuid>
-    <RootNamespace>Week2</RootNamespace>
+    <ProjectGuid>{a75a2b32-63b2-4cf9-b75c-6eb0872a7441}</ProjectGuid>
+    <RootNamespace>Week2Further</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,11 +123,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="intcompare.cpp" />
-    <ClCompile Include="oddeven.cpp" />
-    <ClCompile Include="leapyear.cpp" />
-    <ClCompile Include="secondstohours.cpp" />
-    <ClCompile Include="gradecalc.cpp" />
+    <ClCompile Include="catdoor.cpp" />
+    <ClCompile Include="fizzbuzz.cpp" />
+    <ClCompile Include="sorting.cpp" />
+    <ClCompile Include="voting.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
