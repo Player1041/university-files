@@ -32,6 +32,7 @@ int ys[numOfCircles];
 int velxs[numOfCircles];
 int velys[numOfCircles];
 int radii[numOfCircles];
+int upOrDown[numOfCircles];
 
 unsigned char rs[numOfCircles];
 unsigned char gs[numOfCircles];
@@ -51,6 +52,10 @@ int main()
 		ys[i] = rand() % gScreenHeight - (2 * radii[i]);
 		velxs[i] = 1 + rand() % 10;
 		velys[i] = 1 + rand() % 10;
+		rs[i] = rand() % 256;
+		gs[i] = rand() % 256;
+		bs[i] = rand() % 256;
+		upOrDown[i] = rand() % 2;
 
 	}
 
@@ -58,7 +63,7 @@ int main()
 
 	while (UpdateFramework())
 	{
-		
+
 		// Draws a circle at numOfCircles,200 with radius 20
 		//if (x > gScreenWidth - (2 * radius) || x < 0) velx = -velx;
 		//if (y > gScreenHeight - (2 * radius) || y < 0) vely = -vely;
@@ -79,11 +84,25 @@ int main()
 			ChangeColour(rs[i], gs[i], bs[i], as[i]);
 			DrawCircle(xs[i], ys[i], radii[i]);
 
-			rs[i] = rand() % 256;
-			gs[i] = rand() % 256;
-			bs[i] = rand() % 256;
+			if (rs[i] <= 0 || gs[i] <= 0 || bs[i] <= 0) {
+				upOrDown[i] = 1;
+			}
+			else if (rs[i] >= 255 || gs[i] >= 255 || bs[i] >= 255) {
+				upOrDown[i] = 0;
+			}
+			
+			if (upOrDown[i] == 0) {
+				rs[i] = rs[i] - 1;
+				gs[i] = gs[i] - 1;
+				bs[i] = bs[i] - 1;
+				as[i] = 255;
+			}
+			else if (upOrDown[i] == 1) {
+			rs[i] = rs[i] + 1;
+			gs[i] = gs[i] + 1;
+			bs[i] = bs[i] + 1;
 			as[i] = 255;
-
+			};
 			if (xs[i] > gScreenWidth - (2 * radii[i]) || xs[i] < 0) velxs[i] = -velxs[i];
 			if (ys[i] > gScreenHeight - (2 * radii[i]) || ys[i] < 0) velys[i] = -velys[i];
 

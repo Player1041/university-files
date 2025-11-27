@@ -10,11 +10,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="framework.cpp">
       <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleWithGravity.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
