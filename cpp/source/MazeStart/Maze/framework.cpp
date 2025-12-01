@@ -5,6 +5,8 @@
 #include <memory>
 #include <chrono>
 #include <thread>
+#include <string>
+#include <filesystem>
 #include "Framework.h"
 
 extern int gScreenWidth;
@@ -114,6 +116,12 @@ void StartClock()
 	gClock.restart();
 }
 
+int StopClock()
+{
+	int finish = gClock.getElapsedTime().asSeconds();
+	return finish;
+}
+
 float GetElapsedTime()
 {
 	return gClock.getElapsedTime().asSeconds();
@@ -143,4 +151,25 @@ bool IsButtonPressed(EButton whichButton)
 	}
 
 	return false;
+}
+
+sf::Font font;
+void initFont(const std::string& fontFileName) {
+	if (!font.loadFromFile(fontFileName)) {
+		std::cerr << "Could not load font:" << std::endl;
+	}
+	else {
+		std::cout << "Font loaded successfully" << std::endl;
+	}
+}
+
+void drawText(const std::string& textToDisplay) {
+
+	sf::Text text;
+	text.setFont(font); // font is a sf::Font
+	text.setString(textToDisplay);
+	text.setCharacterSize(24); // in pixels, not points!
+	text.setFillColor(sf::Color::White);
+	gWindow.draw(text);
+
 }
