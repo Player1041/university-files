@@ -27,4 +27,7 @@
       <Filter>Source Files</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="maze1.txt" />
+  </ItemGroup>
 </Project>

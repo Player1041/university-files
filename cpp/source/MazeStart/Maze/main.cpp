@@ -1,8 +1,9 @@
-/*
+	/*
 	GPF Week 6 - Maze Start Code
 */
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <time.h>
 #include <stdio.h>
@@ -64,8 +65,42 @@ char gMap[kMazeRowsY][kMazeColumnsX] = {
 
 int playerX = 1;
 int playerY = 18;
+ofstream file;
 bool goalReached = false;
 bool mazeFullyDrawn = false;
+
+void SaveGame() {
+	file.open("savegame.txt");
+	cout << "Game Saved" << endl;
+	for (int y = 0; y < kMazeRowsY; y++) {
+		for (int x = 0; x < kMazeColumnsX; x++) {
+			file << gMap[y][x];
+		}
+		file << endl;
+	}
+	file.close();
+	if (!file) {
+		cerr << "file could not be opened";
+	}
+}
+
+void LoadGame() {
+	ifstream file;
+	cout << "Game Loaded" << endl;
+	file.open("savegame.txt");
+	if (!file) {
+		cerr << "file could not be opened";
+		return;
+	}
+	cout << "Game Loaded" << endl;
+	
+	for (int y = 0; y < kMazeRowsY; y++) {
+		for (int x = 0; x < kMazeColumnsX; x++) {
+			file >> gMap[y][x];
+		}
+	}
+	file.close();
+}
 
 void DrawMaze() {
 	const int cellWidth = gScreenWidth / kMazeColumnsX;
@@ -106,6 +141,12 @@ void HandleMovement() {
 	int newPlayerX = playerX;
 	int newPlayerY = playerY;
 	switch (GetLastKeyPressed()) {
+		case EKeyPressed::eSave:
+			SaveGame();
+			break;
+		case EKeyPressed::eLoad:
+			LoadGame();
+			break;
 	case EKeyPressed::eLeft:
 		newPlayerX = playerX - 1;
 		if (newPlayerX >= 0 && gMap[playerY][newPlayerX] != 'W') {

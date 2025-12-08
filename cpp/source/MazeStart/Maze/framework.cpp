@@ -64,6 +64,10 @@ bool UpdateFramework()
 		lastKeyPressed = EKeyPressed::eUp;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		lastKeyPressed = EKeyPressed::eDown;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		lastKeyPressed = EKeyPressed::eSave;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+		lastKeyPressed = EKeyPressed::eLoad;
 
     // Get the window to display its contents
     gWindow.display();
