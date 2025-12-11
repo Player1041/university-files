@@ -1,0 +1,2 @@
+This folder was part of a larger Git repository which has my uni files past just this module, so no folder will have .git properties, but was managed through git.
+See https://github.com/Player1041/university-files/tree/main/cpp/prog-fundamentals for said repo.
