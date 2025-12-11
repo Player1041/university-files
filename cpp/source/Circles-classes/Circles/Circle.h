@@ -24,7 +24,7 @@ public:
 	int GetVelX();
 	int GetVelY();
 	int GetUpOrDown();
-
+    
 	void SetX(int value);
 	void SetY(int value);
 	void SetRadius(int value);
