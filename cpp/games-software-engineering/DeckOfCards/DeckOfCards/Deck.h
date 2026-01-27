@@ -11,8 +11,8 @@ private:
 public:
     Deck();
     void Build();
-    //void Shuffle();
-    //void Deal(PlayingCard);
+    void Shuffle();
+    PlayingCard Deal();
 
     friend inline std::ostream& operator<<(std::ostream& os, const Deck& deck)
     {
