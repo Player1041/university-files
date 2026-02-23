@@ -15,9 +15,18 @@
 using namespace std;
 using namespace sf;
 
+list<RectangleShape> rectangles = {};
+
+void drawRectangle(float x, float y) {
+    RectangleShape rect({ 50.0f, 40.0f });
+    rect.setPosition({ x, y });
+    rect.setFillColor(Color::Green);
+    rectangles.push_front(rect);
+}
+
 int main()
 {
-    list<RectangleShape> rectangles = {};
+
     float x = 0;
     float y = 0;
 
@@ -33,26 +42,44 @@ int main()
 
             window.clear(sf::Color::Black);
 
-            if (sf::Keyboard::isKeyPressed(Keyboard::Key::Space) && sf::Keyboard::isKeyPressed(Keyboard::Key::Left)); {
-            if (canInsertNewRect) {
-                RectangleShape rect({ 50.0f, 150.0f });
-                rect.setPosition({ x, y });
-                rect.setFillColor(Color::Green);
-                rectangles.push_front(rect);
-                x += 50;
-                //y += 150;
-                canInsertNewRect = false;
+            if (sf::Keyboard::isKeyPressed(Keyboard::Key::Space) && sf::Keyboard::isKeyPressed(Keyboard::Key::Left)) {
+
+                if (canInsertNewRect) {
+                    drawRectangle(x, y);
+                    x -= 50;
+                    canInsertNewRect = false;
+                }
+            }
+            else if (sf::Keyboard::isKeyPressed(Keyboard::Key::Space) && sf::Keyboard::isKeyPressed(Keyboard::Key::Right)) {
+                if (canInsertNewRect) {
+                    drawRectangle(x, y);
+                    canInsertNewRect = false;
+                    x += 50;
+                }
+            }
+            else if (sf::Keyboard::isKeyPressed(Keyboard::Key::Space) && sf::Keyboard::isKeyPressed(Keyboard::Key::Up)) {
+                if (canInsertNewRect) {
+                    drawRectangle(x, y);
+                    canInsertNewRect = false;
+                    y -= 40;
+                }
+            }
+            else if (sf::Keyboard::isKeyPressed(Keyboard::Key::Space) && sf::Keyboard::isKeyPressed(Keyboard::Key::Down)) {
+                if (canInsertNewRect) {
+                    drawRectangle(x, y);
+                    canInsertNewRect = false;
+                    y += 40;
+                }
             }
             else {
-                canInsertNewRect = true;
+                    canInsertNewRect = true;
             }
-        }
 
             for (const auto& rectangle : rectangles) {
                 window.draw(rectangle);
-			}
+            }
 
             window.display();
         }
-	}
-} 
+    }
+}
