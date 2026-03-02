@@ -19,7 +19,8 @@ const int WINDOW_HEIGHT = 640;
 const int CELL_SIZE = 32;           // Each grid square is 32x32 pixels
 const int GRID_COLS = WINDOW_WIDTH / CELL_SIZE;   // 20 columns
 const int GRID_ROWS = WINDOW_HEIGHT / CELL_SIZE;   // 20 rows
-const float MOVE_INTERVAL = 0.15f;     // Seconds between each snake step
+const float MOVE_INTERVAL = 0.15f;     // Seconds between each snake step+
+
 
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
@@ -50,6 +51,11 @@ void drawCell(sf::RenderWindow& window, int col, int row, sf::Color colour)
 
 int main()
 {
+
+    sf::Font font;
+    if (!font.openFromFile("font.ttf"))  // openFromFile() is new in 3.0
+        return -1;
+
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     sf::RenderWindow window(
@@ -58,7 +64,7 @@ int main()
     );
     window.setFramerateLimit(60);
 
-    // Head is always at index 0.
+    // Head is always at index 0
     // Snake has 3 parts to start
     std::vector<sf::Vector2i> snake;
     snake.push_back({ GRID_COLS / 2,     GRID_ROWS / 2 });
@@ -212,6 +218,19 @@ int main()
             drawCell(window, snake[i].x, snake[i].y, colour);
         }
 
+        sf::Text scoreText(font);
+        scoreText.setString("Score: " + std::to_string(snake.size() - 3));
+        scoreText.setCharacterSize(24);
+        scoreText.setFillColor(sf::Color::White);
+
+
+        if (!gameOver)
+        {
+            // Draw score
+            scoreText.setPosition({ 10.f, 10.f });
+            window.draw(scoreText);
+		}
+
         // Game over overlay
         if (gameOver)
         {
@@ -220,7 +239,15 @@ int main()
             overlay.setFillColor(sf::Color(0, 0, 0, 160));
             window.draw(overlay);
 
-            // TODO - Add gameover message and restart instructions, needs to do with font loading, will add later
+			sf::Text gameOverText(font);
+			gameOverText.setString("Game Over!\nPress R to Restart");
+            gameOverText.setCharacterSize(48);
+            gameOverText.setFillColor(sf::Color::White);
+            gameOverText.setPosition({ 100.f, 100.f });
+			window.draw(gameOverText);
+
+            scoreText.setPosition({ 100.f, 400.f });
+            window.draw(scoreText);
         }
 
         window.display();
