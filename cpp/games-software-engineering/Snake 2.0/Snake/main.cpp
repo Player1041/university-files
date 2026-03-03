@@ -70,6 +70,7 @@ int main()
     snake.push_back({ GRID_COLS / 2,     GRID_ROWS / 2 });
     snake.push_back({ GRID_COLS / 2 - 1, GRID_ROWS / 2 });
     snake.push_back({ GRID_COLS / 2 - 2, GRID_ROWS / 2 });
+    snake.push_back({ GRID_COLS / 2 - 3, GRID_ROWS / 2 });
 
     Direction dir = RIGHT;
     Direction nextDir = RIGHT; // Buffer to allow one change per step
