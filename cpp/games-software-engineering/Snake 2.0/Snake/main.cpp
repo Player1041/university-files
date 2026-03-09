@@ -13,12 +13,15 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <fstream>
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 640;
 const int CELL_SIZE = 32;           // Each grid square is 32x32 pixels
 const int GRID_COLS = WINDOW_WIDTH / CELL_SIZE;   // 20 columns
 const int GRID_ROWS = WINDOW_HEIGHT / CELL_SIZE;   // 20 rows
+const int INITIAL_SNAKE_LENGTH = 12;
 const float MOVE_INTERVAL = 0.15f;     // Seconds between each snake step+
 
 
@@ -48,10 +51,40 @@ void drawCell(sf::RenderWindow& window, int col, int row, sf::Color colour)
     window.draw(cell);
 }
 
-
+using namespace std;
 int main()
 {
+    int highScores[5] = { 0 };
+	bool highScoresLoaded = false;
+    while (!highScoresLoaded)
+    {
+        ifstream inFile;
+        inFile.open("highscore.txt");
 
+        if (inFile.is_open())
+        {
+			cout << "High scores loaded successfully!" << endl;
+            for (int i = 0; i < 5; ++i)
+            {
+                inFile >> highScores[i];
+            }
+            inFile.close();
+			highScoresLoaded = true;
+        }
+        else
+        {
+            cerr << "Unable to open highscore.txt, creating file" << endl;
+            std::ofstream outfile("highscore.txt");
+
+            outfile.close();
+        }
+
+    }
+    cout << "High Scores:" << endl;
+    for (int i = 0; i < 5; ++i)
+    {
+        cout << i + 1 << ". " << highScores[i] << endl;
+    }
     sf::Font font;
     if (!font.openFromFile("font.ttf"))  // openFromFile() is new in 3.0
         return -1;
@@ -67,10 +100,9 @@ int main()
     // Head is always at index 0
     // Snake has 3 parts to start
     std::vector<sf::Vector2i> snake;
-    snake.push_back({ GRID_COLS / 2,     GRID_ROWS / 2 });
-    snake.push_back({ GRID_COLS / 2 - 1, GRID_ROWS / 2 });
-    snake.push_back({ GRID_COLS / 2 - 2, GRID_ROWS / 2 });
-    snake.push_back({ GRID_COLS / 2 - 3, GRID_ROWS / 2 });
+    for (int i = 0; i < INITIAL_SNAKE_LENGTH; ++i) {
+        snake.push_back({ GRID_COLS / 2 - i, GRID_ROWS / 2 });
+    }
 
     Direction dir = RIGHT;
     Direction nextDir = RIGHT; // Buffer to allow one change per step
@@ -99,9 +131,9 @@ int main()
                 if (gameOver && keyPressed->code == sf::Keyboard::Key::R)
                 {
                     snake.clear();
-                    snake.push_back({ GRID_COLS / 2,     GRID_ROWS / 2 });
-                    snake.push_back({ GRID_COLS / 2 - 1, GRID_ROWS / 2 });
-                    snake.push_back({ GRID_COLS / 2 - 2, GRID_ROWS / 2 });
+                    for (int i = 0; i < INITIAL_SNAKE_LENGTH; ++i) {
+						snake.push_back({ GRID_COLS / 2 - i, GRID_ROWS / 2 });
+                    }
                     dir = nextDir = RIGHT;
                     food = randomFoodPos();
                     timeSinceLastMove = 0.f;
@@ -220,10 +252,18 @@ int main()
         }
 
         sf::Text scoreText(font);
-        scoreText.setString("Score: " + std::to_string(snake.size() - 3));
+        scoreText.setString("Score: " + std::to_string(snake.size() - INITIAL_SNAKE_LENGTH));
         scoreText.setCharacterSize(24);
         scoreText.setFillColor(sf::Color::White);
-
+        
+		sf::Text highScoreText(font);
+        highScoreText.setString("High Scores:\n1. " + std::to_string(highScores[0]) +
+            "\n2. " + std::to_string(highScores[1]) +
+            "\n3. " + std::to_string(highScores[2]) +
+            "\n4. " + std::to_string(highScores[3]) +
+			"\n5. " + std::to_string(highScores[4]));
+		highScoreText.setCharacterSize(24);
+		highScoreText.setFillColor(sf::Color::White);
 
         if (!gameOver)
         {
@@ -249,6 +289,39 @@ int main()
 
             scoreText.setPosition({ 100.f, 400.f });
             window.draw(scoreText);
+            window.draw(highScoreText);
+
+			// Check if score is a high score
+			int score = snake.size() - INITIAL_SNAKE_LENGTH;
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (score > highScores[i])
+                {
+                    for (int j = 4; j > i; j--)
+                    {
+                        highScores[j] = highScores[j - 1];
+                    }
+
+                    highScores[i] = score;   // insert the new high score
+                    
+                }
+                break;
+                
+
+            }
+
+            ofstream outFile;
+            outFile.open("highscore.txt");
+
+            if (outFile.is_open())
+            {
+                for (int i = 0; i < 5; ++i)
+                {
+                    outFile << highScores[i] << endl;
+                }
+                outFile.close();
+            }
         }
 
         window.display();
