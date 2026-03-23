@@ -147,7 +147,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="Question.cpp" />
+    <ClCompile Include="QuestionManager.cpp" />
+    <ClCompile Include="Snake.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="Question.h" />
+    <ClInclude Include="QuestionManager.h" />
+    <ClInclude Include="Snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
