@@ -12,7 +12,7 @@ class Question
 		SPELLING
 	};
 
-	string QUESTION_NAME;
-	string QUESTION_DESCRIPTION;
+	std::string QUESTION_NAME;
+	std::string QUESTION_DESCRIPTION;
 };
 

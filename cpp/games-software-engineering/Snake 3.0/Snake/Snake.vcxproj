@@ -156,6 +156,7 @@
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="PlayerManager.h" />
