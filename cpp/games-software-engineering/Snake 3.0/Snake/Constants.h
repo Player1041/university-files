@@ -1,6 +1,6 @@
 #pragma once
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 640;
+const int WINDOW_WIDTH = 1000;
+const int WINDOW_HEIGHT = 800;
 const int CELL_SIZE = 32;           // Each grid square is 32x32 pixels
 const int GRID_COLS = WINDOW_WIDTH / CELL_SIZE;   // 20 columns
 const int GRID_ROWS = WINDOW_HEIGHT / CELL_SIZE;   // 20 rows

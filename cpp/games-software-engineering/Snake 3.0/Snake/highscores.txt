@@ -1,0 +1,21 @@
+Alphabet|Endless|DEAD|2|25.2899
+Arithmetic|seanvase|12|50.2055
+Arithmetic|10 Rounds|SEANVASE|10|65.069
+Arithmetic|10 Rounds|HELLOTHE|1|7.03477
+Classic|Classic|SEANVAS|18|0
+Classic|Classic|DEMO|4|0
+Classic|Classic|AAAA|3|0
+Classic|Classic|AAA|1|0
+Classic|Classic|DEMODEAD|0|0
+Random|10 Rounds|TEST|8|52.6309
+Random|Endless|A|0|52.065
+Spelling|Endless|AAAA|5|45.4231
+Spelling|Endless|R|0|1.95145
+Spelling|Endless|R|0|5.88761
+Spelling|Endless|R|0|11.25
+Times Tables|SEAN|10|39.7499
+Times Tables|Endless|RRRRRRR|3|20.98
+Times Tables|Endless|R|3|22.3649
+Times Tables|Endless|AAA|1|8.06022
+Times Tables|Endless|HELLP|0|3.14809
+Times Tables|Endless|RRR|0|3.34236
