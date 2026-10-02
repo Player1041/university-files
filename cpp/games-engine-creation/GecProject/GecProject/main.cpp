@@ -49,8 +49,12 @@ int main()
         return -1;
 
     // Create a simple shape to draw
-    sf::RectangleShape shape({100.f, 100.f});
-    
+    sf::RectangleShape shape({ 100.f, 100.f });
+
+    sf::Texture myTexture;
+    myTexture.loadFromFile("texture.png");
+    sf::Sprite* mySprite = new sf::Sprite(myTexture);
+
     
     // Clock required by ImGui
     sf::Clock uiDeltaClock;
@@ -107,6 +111,9 @@ int main()
         // Draw the shape
         window.draw(shape);
         shape.setFillColor(sf::Color(red, green, blue, opacity));
+
+
+        window.draw(*mySprite);
 
         // UI needs drawing last
         ImGui::SFML::Render(window);
