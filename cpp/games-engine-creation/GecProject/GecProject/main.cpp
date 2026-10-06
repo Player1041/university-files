@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include "AnimatedSprite.h"
 void DefineGUI();
 
 
@@ -49,15 +49,15 @@ int main()
         return -1;
 
     // Create a simple shape to draw
-    sf::RectangleShape shape({ 100.f, 100.f });
-
-    sf::Texture myTexture;
-    myTexture.loadFromFile("texture.png");
-    sf::Sprite* mySprite = new sf::Sprite(myTexture);
+    sf::RectangleShape shape({100.f, 100.f});
+    
+    // spritesheet
+    AnimatedSprite mySprite = AnimatedSprite("spritesheet.png", 26, 20, 5);
 
     
     // Clock required by ImGui
     sf::Clock uiDeltaClock;
+    sf::Clock updateClock;
   
     while (window.isOpen())
     {
@@ -112,8 +112,8 @@ int main()
         window.draw(shape);
         shape.setFillColor(sf::Color(red, green, blue, opacity));
 
-
-        window.draw(*mySprite);
+        mySprite.update(updateClock.restart());
+        mySprite.draw(&window);
 
         // UI needs drawing last
         ImGui::SFML::Render(window);
