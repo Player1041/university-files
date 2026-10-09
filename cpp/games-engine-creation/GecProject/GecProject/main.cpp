@@ -24,9 +24,17 @@ float opacity = 255.f;
 int window_x = 800;
 int window_y = 600;
 
+int sprite_start_x = 0;
+int sprite_start_y = 0;
+
+int sprite_current_x = sprite_start_x;
+int sprite_current_y = sprite_start_y;
 
 static float timer = 0.0f;
 static int seconds = 0;
+
+
+std::vector<AnimatedSprite*> sprites;
 
 int main()
 {
@@ -43,6 +51,7 @@ int main()
 
     // Create the SFML window
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(window_x, window_y)), "GEC Start Project");
+    window.setFramerateLimit(120);
 
     // Set up ImGui (the UI library)
     if (!ImGui::SFML::Init(window))
@@ -51,14 +60,10 @@ int main()
     // Create a simple shape to draw
     sf::RectangleShape shape({100.f, 100.f});
     
-    // spritesheet
-    AnimatedSprite mySprite = AnimatedSprite("spritesheet.png", 26, 20, 5);
-
-    
     // Clock required by ImGui
     sf::Clock uiDeltaClock;
     sf::Clock updateClock;
-  
+
     while (window.isOpen())
     {
 
@@ -79,6 +84,9 @@ int main()
         float deltaTime = ImGui::GetIO().DeltaTime;
 
         timer += deltaTime;
+
+
+
 
         if (timer >= 1.0f) {
             seconds += (int)timer;
@@ -110,10 +118,12 @@ int main()
         
         // Draw the shape
         window.draw(shape);
-        shape.setFillColor(sf::Color(red, green, blue, opacity));
-
-        mySprite.update(updateClock.restart());
-        mySprite.draw(&window);
+        //shape.setFillColor(sf::Color(red, green, blue, opacity));
+        sf::Time dt = updateClock.restart();
+        for (auto& sprite : sprites) {
+            sprite->update(dt);
+            sprite->draw(&window);
+        }
 
         // UI needs drawing last
         ImGui::SFML::Render(window);
@@ -164,11 +174,55 @@ void DefineGUI()
         green = 0.f;
         blue = 255.f;
     }
+
     
     ImGui::SliderFloat("Red", &red, 0, 255);
     ImGui::SliderFloat("Green", &green, 0, 255);
     ImGui::SliderFloat("Blue", &blue, 0, 255);
     ImGui::SliderFloat("Opacity", &opacity, 0, 255);
+
+
+    if (ImGui::Button("Add White Plane"))
+    {
+        AnimatedSprite* sprite = new AnimatedSprite("spritesheet.png", 26, 20, sprite_current_x, sprite_current_y, 5);
+        sprites.emplace_back(sprite);
+
+        sprite_current_x += 30;
+
+        if (sprite_current_x >= 350) {
+            sprite_current_x = 0;
+            sprite_current_y += 30;
+        }
+    }
+    
+    if (ImGui::Button("Add Red Plane"))
+    {
+        AnimatedSprite* sprite = new AnimatedSprite("spritesheet-red.png", 26, 20, sprite_current_x, sprite_current_y, 5);
+        sprites.emplace_back(sprite);
+
+        sprite_current_x += 30;
+
+        if (sprite_current_x >= 350) {
+            sprite_current_x = 0;
+            sprite_current_y += 30;
+        }
+    }
+
+    if (ImGui::Button("Add Turquoise Plane"))
+    {
+        AnimatedSprite* sprite = new AnimatedSprite("spritesheet-turq.png", 26, 20, sprite_current_x, sprite_current_y, 5);
+        sprites.emplace_back(sprite);
+
+        sprite_current_x += 30;
+
+        if (sprite_current_x >= 350) {
+            sprite_current_x = 0;
+            sprite_current_y += 30;
+        }
+    }
+
+
+
 
  //   ImGui::Checkbox("Wireframe", &m_wireframe);	// A checkbox linked to a member variable
 
@@ -177,6 +231,5 @@ void DefineGUI()
    // ImGui::SliderFloat("Speed", &gAnimationSpeed, 0.01f, 0.3f);	// Slider from 0.0 to 1.0
 
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-
     ImGui::End();
 }

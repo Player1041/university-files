@@ -1,6 +1,6 @@
 #include "AnimatedSprite.h"
 #include <iostream>
-AnimatedSprite::AnimatedSprite(std::string filePath, int width, int height, int maxFrames) {
+AnimatedSprite::AnimatedSprite(std::string filePath, int width, int height, float loc_x, float loc_y, int maxFrames) {
 
 	if (!m_loadedTexture.loadFromFile(filePath)) {
 		std::cout << "Shit failed";
@@ -12,9 +12,13 @@ AnimatedSprite::AnimatedSprite(std::string filePath, int width, int height, int 
 		m_width = width;
 		m_height = height;
 
+		m_x = loc_x;
+		m_y = loc_y;
+
 		m_maxFrames = texXY.x / m_width;
 		m_sprite = new sf::Sprite(m_loadedTexture);
 		m_sprite->setTextureRect(sf::IntRect({ m_currentFrame * m_width, 0 }, { m_width, m_height }));
+		m_sprite->setPosition(sf::Vector2f(m_x, m_y));
 
 	}
 }
