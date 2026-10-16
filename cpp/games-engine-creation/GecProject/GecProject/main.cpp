@@ -9,6 +9,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "AnimatedSprite.h"
+#include "Character.h"
 void DefineGUI();
 
 
@@ -35,6 +36,8 @@ static int seconds = 0;
 
 
 std::vector<AnimatedSprite*> sprites;
+
+Character* character = nullptr;
 
 int main()
 {
@@ -120,9 +123,17 @@ int main()
         window.draw(shape);
         //shape.setFillColor(sf::Color(red, green, blue, opacity));
         sf::Time dt = updateClock.restart();
+
         for (auto& sprite : sprites) {
             sprite->update(dt);
             sprite->draw(&window);
+        }
+
+        if (character != nullptr) {
+            character->update(dt);
+            character->move(&window);
+            character->draw(&window);
+       
         }
 
         // UI needs drawing last
@@ -181,6 +192,9 @@ void DefineGUI()
     ImGui::SliderFloat("Blue", &blue, 0, 255);
     ImGui::SliderFloat("Opacity", &opacity, 0, 255);
 
+    if (ImGui::Button("Spawn Character")) {
+        character = new Character("Name", 0, 26, 20, 0, 0, 5);
+    }
 
     if (ImGui::Button("Add White Plane"))
     {
